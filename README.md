@@ -141,6 +141,6 @@ This project is provided for educational and portfolio purposes.
 
 ## Author: John Nkanu
 
-**DevOps Engineer**
+**DevOps Engineer** | **Last Updated**: December 2025
 ---
-**Last Updated**: December 2025
+
