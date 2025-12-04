@@ -137,7 +137,7 @@ terraform destroy
 
 ## License
 
-This project is provided as-is for educational and portfolio purposes.
+This project is provided for educational and portfolio purposes.
 
 ## Author: John Nkanu
 
