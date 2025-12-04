@@ -141,6 +141,6 @@ This project is provided for educational and portfolio purposes.
 
 ## Author: John Nkanu
 
-**DevOps Engineer** | Infrastructure as Code Specialist
+**DevOps Engineer**
 ---
 **Last Updated**: December 2025
