@@ -9,11 +9,11 @@ terraform {
 
 terraform {
   backend "s3" {
-    bucket         = "terraform-backend-31112025"
+    bucket         = var.backend_bucket
     key            = "src-terraform-aws-ssm-project/terraform.tfstate"
-    region         = "us-east-1"
-    profile        = "iamadmin-general"
-    dynamodb_table = "terraform_state_lock"
+    region         = var.aws_region
+    profile        = var.aws_profile
+    dynamodb_table = var.dynamo_table
     encrypt        = "true"
   }
 }
