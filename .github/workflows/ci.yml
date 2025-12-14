@@ -11,3 +11,5 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: test workflow
+        run: echo testing the step!
