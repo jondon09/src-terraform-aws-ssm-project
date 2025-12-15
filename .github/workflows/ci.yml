@@ -9,7 +9,7 @@ jobs:
       - name: test workflow
         run: echo hellow world!
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: test workflow
         run: echo testing the step!
