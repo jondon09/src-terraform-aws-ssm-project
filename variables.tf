@@ -10,10 +10,10 @@ variable "aws_profile" {
 
 variable "backend_bucket" {
   description = "Name of the backend bucket for remote backend."
-  type = string
+  type        = string
 }
 
 variable "dynamo_table" {
   description = "name of dynamo table for remote locking."
-  type = string
+  type        = string
 }
