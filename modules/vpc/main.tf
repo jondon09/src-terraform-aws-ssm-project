@@ -91,7 +91,7 @@ resource "aws_eip" "ngw" {
 
 resource "aws_nat_gateway" "ngw" {
   count         = local.num_of_public_subnets
-  allocation_id = element(aws_eip.ngw[id].id, count.index)
+  allocation_id = element(aws_eip.ngw[*].id, count.index)
   subnet_id     = element(aws_subnet.public[*].id, count.index)
   depends_on    = [aws_internet_gateway.igw]
 
