@@ -1,11 +1,4 @@
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.99.1"
-    }
-  }
-}
+
 # Local variable to store the number of public and private subnets
 locals {
   num_of_public_subnets  = length(var.vpc_config.availability_zones)
