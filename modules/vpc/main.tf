@@ -23,7 +23,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-### Public Subnet ###
+### Public Subnets and associated Route tables ###
 
 resource "aws_subnet" "public" {
   count             = local.num_of_public_subnets
@@ -45,9 +45,22 @@ resource "aws_route_table" "public" {
   }
 }
 
-# Associate the route table with a Public Subnet
+# Associates the route table with a Public Subnet
 resource "aws_route_table_association" "public" {
   count          = local.num_of_public_subnets
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
+}
+
+### Private Subnets and associated Route tables ###
+
+resource "aws_subnet" "private" {
+  count             = local.num_of_private_subnets
+  vpc_id            = aws_vpc.vpc.id
+  availability_zone = var.vpc_config.availability_zones[count.index]
+  cidr_block        = cidrsubnet(aws_vpc.vpc.cidr_block, 4, count.index + 1) # automatically creates VPC CIDR based on CIDR Block
+  tags = {
+    "Name" = "cf_private_subnet_${count.index + 1}"
+  }
+
 }
