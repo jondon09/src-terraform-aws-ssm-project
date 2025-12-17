@@ -1,3 +1,6 @@
+# Get current region
+data "aws_region" "current" {}
+
 # Create VPC Network
 module "networking" {
   source = "./modules/vpc"
@@ -13,6 +16,8 @@ module "networking" {
   }
 }
 
-# Get current region
+### Enable SSM ###
+module "ssm" {
+  source = "./modules/ssm"
 
-data "aws_region" "current" {}
+}
