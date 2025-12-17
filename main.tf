@@ -58,7 +58,7 @@ resource "aws_security_group_rule" "vpce_ingress_itself" {
 module "ec2_public1" {
   source = "./modules/ec2"
   ec2_config = {
-    instance_type = "t2.micro"
+    instance_type = "t3.micro"
     subnet_id     = module.networking.vpc_resource.public_subnet_ids[0]
     public_ip     = true
     tags = {
@@ -70,7 +70,7 @@ module "ec2_public1" {
 module "ec2_private1" {
   source = "./modules/ec2"
   ec2_config = {
-    instance_type = "t2.micro"
+    instance_type = "t3.micro"
     subnet_id     = module.networking.vpc_resource.private_subnet_id[0]
     tags = {
       "Name" = "cf_ec2_private1"
