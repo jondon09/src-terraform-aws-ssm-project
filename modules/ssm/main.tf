@@ -30,6 +30,6 @@ resource "aws_iam_role_policy_attachment" "default_host_management" {
 
 # Enable SSM in the region
 resource "aws_ssm_service_setting" "default_host_management" {
-  setting_id    = "arn:aws:ssm:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:servicesetting/ssm/managed-instance/default-ec2-instance-management-role"
-  setting_value = aws_iam_role.default_host_management.name
+  setting_id    = "arn:aws:ssm:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:servicesetting/ssm/managed-instance/default-ec2-instance-management-role"
+  setting_value = aws_iam_role.default_host_management.id
 }

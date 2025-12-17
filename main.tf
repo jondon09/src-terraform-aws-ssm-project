@@ -26,7 +26,7 @@ resource "aws_vpc_endpoint" "vpc_endpoints" {
   for_each            = toset(var.vpc_endpoint)
   vpc_id              = module.networking.vpc_resource.vpc_id
   subnet_ids          = module.networking.vpc_resource.private_subnet_id
-  service_name        = "com.amazonaws.${data.aws_region.current.name}.${each.key}"
+  service_name        = "com.amazonaws.${data.aws_region.current.id}.${each.key}"
   vpc_endpoint_type   = "Interface"
   private_dns_enabled = true
   security_group_ids  = [aws_security_group.vpce_security_group.id]
