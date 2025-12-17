@@ -7,5 +7,8 @@ module "networking" {
     enable_dns_hostnames = true
     enable_dns_support   = true
     availability_zones   = ["us-east-1a", "us-east-1b"]
+    tags = {
+      "Name" = "ct_vpc"
+    }
   }
 }
