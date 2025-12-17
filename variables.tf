@@ -17,3 +17,10 @@ variable "dynamo_table" {
   description = "name of dynamo table for remote locking."
   type        = string
 }
+
+variable "vpc_endpoint" {
+  type        = list(string)
+  description = "A list of VPC endpoint to create"
+  default     = ["ssm", "ssmmessages"]
+}
+
