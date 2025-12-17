@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.99.1"
+    }
+  }
+}
 # Local variable to store the number of public and private subnets
 locals {
   num_of_public_subnets  = length(var.vpc_config.availability_zones)
@@ -63,4 +71,19 @@ resource "aws_subnet" "private" {
     "Name" = "cf_private_subnet_${count.index + 1}"
   }
 
+}
+
+resource "aws_route_table" "private" {
+  count  = local.num_of_private_subnets
+  vpc_id = aws_vpc.vpc.id
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.ngw[count.index].id
+  }
+}
+
+resource "aws_route_table_association" "private" {
+  count          = local.num_of_private_subnets
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = element(aws_route_table.private[*].id, count.index)
 }
