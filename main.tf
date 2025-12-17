@@ -52,3 +52,28 @@ resource "aws_security_group_rule" "vpce_ingress_itself" {
   security_group_id        = aws_security_group.vpce_security_group.id
   source_security_group_id = aws_security_group.vpce_security_group.id
 }
+
+### EC2's
+
+module "ec2_public1" {
+  source = "./modules/ec2"
+  ec2_config = {
+    instance_type = "t2.micro"
+    subnet_id     = module.networking.vpc_resource.public_subnet_ids[0]
+    public_ip     = true
+    tags = {
+      "Name" = "cf_ec2_public1"
+    }
+  }
+}
+
+module "ec2_private1" {
+  source = "./modules/ec2"
+  ec2_config = {
+    instance_type = "t2.micro"
+    subnet_id     = module.networking.vpc_resource.private_subnet_id[0]
+    tags = {
+      "Name" = "cf_ec2_private1"
+    }
+  }
+}
