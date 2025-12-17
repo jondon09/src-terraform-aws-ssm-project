@@ -87,3 +87,23 @@ resource "aws_route_table_association" "private" {
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = element(aws_route_table.private[*].id, count.index)
 }
+
+# Elastic IP for NAT Gateway
+resource "aws_eip" "ngw" {
+  count = local.num_of_public_subnets
+  tags = {
+    "Name" = "cf_nat_gateway_${count.index + 1 }"
+  }
+}
+
+resource "aws_nat_gateway" "ngw" {
+  count = local.num_of_public_subnets
+  allocation_id = element(aws_eip.ngw[id].id, count.index)
+  subnet_id = element(aws_subnet.public[*].id, count.index)
+  depends_on = [aws_internet_gateway.igw]
+
+  tags = {
+    "Name" = "cf_nat_gateway_${count.index + 1}"
+  }
+
+}
