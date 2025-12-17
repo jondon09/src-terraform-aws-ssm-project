@@ -1,5 +1,18 @@
-variable "instance_type" {
-  type        = string
-  description = "Instance type for ec2 instance."
-  default     = "t3.micro"
+variable "ec2_config" {
+  type = object({
+    instance_type   = string
+    subnet_id       = string
+    public_ip       = optional(bool, false)
+    security_groups = optional(list(string))
+    tags            = map(string)
+  })
+
+  description = <<EOT
+  configuration options for the EC2 Instance:
+  - instance_type: The instance type for the EC2 Istance.
+  - subnet_id: The subnet ID for the EC2 instance.
+  - public_ip: Assign a public IP address to the EC2 Instance (default: false).
+  - security_groups: A list of security group IDs to apply to EC2 instance.
+  - tags: A map of tags to apply to the EC2 Instance
+  EOT
 }
