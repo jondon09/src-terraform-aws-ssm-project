@@ -1,7 +1,7 @@
 # Get current region
 data "aws_region" "current" {}
 
-# Create VPC Network
+# Create VPC Network ###
 module "networking" {
   source = "./modules/vpc"
 
