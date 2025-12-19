@@ -53,8 +53,7 @@ resource "aws_security_group_rule" "vpce_ingress_itself" {
   source_security_group_id = aws_security_group.vpce_security_group.id
 }
 
-### EC2's
-
+### EC2's ###
 module "ec2_public1" {
   source = "./modules/ec2"
   ec2_config = {
