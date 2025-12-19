@@ -53,13 +53,23 @@ resource "aws_security_group_rule" "vpce_ingress_itself" {
   source_security_group_id = aws_security_group.vpce_security_group.id
 }
 
+resource "aws_security_group_rule" "vpce_ingress_ec2" {
+  type                     = "ingress"
+  description              = "Allow HTTPS traffic from EC2 instances"
+  from_port                = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.vpce_security_group.id
+  to_port                  = 443
+  source_security_group_id = aws_security_group.ssm_ec2.id
+}
 ### EC2's ###
 module "ec2_public1" {
   source = "./modules/ec2"
   ec2_config = {
-    instance_type = "t3.micro"
-    subnet_id     = module.networking.vpc_resource.public_subnet_ids[0]
-    public_ip     = true
+    instance_type   = "t3.micro"
+    subnet_id       = module.networking.vpc_resource.public_subnet_ids[0]
+    public_ip       = true
+    security_groups = [aws_security_group.ssm_ec2.id]
     tags = {
       "Name" = "cf_ec2_public1"
     }
@@ -69,10 +79,29 @@ module "ec2_public1" {
 module "ec2_private1" {
   source = "./modules/ec2"
   ec2_config = {
-    instance_type = "t3.micro"
-    subnet_id     = module.networking.vpc_resource.private_subnet_id[0]
+    instance_type   = "t3.micro"
+    subnet_id       = module.networking.vpc_resource.private_subnet_id[0]
+    security_groups = [aws_security_group.ssm_ec2.id]
     tags = {
       "Name" = "cf_ec2_private1"
     }
   }
+}
+
+### EC2 Security group and associated rules ###
+resource "aws_security_group" "ssm_ec2" {
+  vpc_id      = module.networking.vpc_resource.vpc_id
+  name        = "Allow SSM for EC2"
+  description = "Allow EC2 HTTPS traffic to the SSM VPC Endpoint"
+}
+
+resource "aws_security_group_rule" "ssm_ec2" {
+  type                     = "egress"
+  description              = "Allows EC2 HTTP Traffic to the SSM VPC Endpoint SG"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ssm_ec2.id
+  source_security_group_id = aws_security_group.vpce_security_group.id
+
 }
