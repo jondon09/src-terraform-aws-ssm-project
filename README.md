@@ -12,6 +12,7 @@ This project demonstrates infrastructure-as-code best practices by deploying a s
 - **Least Privilege IAM**: Dedicated IAM role with minimal required permissions for SSM operations
 - **Network Security**: SSM VPC endpoint for private, secure traffic routing without internet exposure
 - **Compute**: Two Amazon Linux 2 EC2 instances (one public, one private) with pre-installed SSM agent
+- **Test**: BDD testing using terraform-compliance for security and compliance.
 
 ## Architecture
 <img title="Terraform Architecture Diagram" src="/Terraform-on-aws.svg">
