@@ -12,7 +12,6 @@ terraform {
     bucket         = "terraform-backend-31112025"
     key            = "src-terraform-aws-ssm-project/terraform.tfstate"
     region         = "us-east-1"
-    profile        = "iamadmin-general"
     dynamodb_table = "terraform_state_lock"
     encrypt        = "true"
   }
@@ -22,5 +21,4 @@ terraform {
 
 provider "aws" {
   region  = var.aws_region
-  profile = var.aws_profile
 }
