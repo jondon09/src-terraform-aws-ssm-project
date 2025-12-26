@@ -98,7 +98,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.IAM_ROLE }}
           aws-region: ${{ env.AWS_REGION }}
-          role-session-name: GitHubActions-BDDTest
+          role-session-name: GitHubActions
 
       - name: Terraform Init
         run: terraform init
