@@ -101,7 +101,7 @@ jobs:
           role-session-name: GitHubActions
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init --reconfigure
         working-directory: ${{ env.TF_WORKING_DIR }}
 
       - name: Generate Terraform Plan
