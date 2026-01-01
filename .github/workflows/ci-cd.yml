@@ -123,7 +123,7 @@ jobs:
         run: |
           terraform-compliance \
             -p ${{ env.TF_WORKING_DIR }}/plan.json \
-            -f ./tests/compliance/features \
+            -f ./test \
             --no-ansi
         continue-on-error: true
 
@@ -134,7 +134,7 @@ jobs:
           name: bdd-test-results
           path: |
             ${{ env.TF_WORKING_DIR }}/plan.json
-            ./tests/compliance/features/
+            ./test
 
       - name: Post BDD Test Results to PR
         if: github.event_name == 'pull_request'
