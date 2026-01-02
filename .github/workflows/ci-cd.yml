@@ -326,7 +326,15 @@ jobs:
     name: Terraform Destroy
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'destroy' && github.event.inputs.confirm_destroy == 'destroy'
-    environment: destroy  # Requires manual approval
+    environment: destroy
+    env:
+      TF_VERSION: "1.7.0"
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      TF_WORKING_DIR: "."
+      TF_VAR_backend_bucket: ${{ secrets.BACKEND_BUCKET }}
+      TF_VAR_dynamo_table: ${{ secrets.DYNAMO_TABLE }}
+      TF_VAR_aws_profile: "github-actions"
+      TF_VAR_aws_region: ${{ vars.AWS_REGION }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
