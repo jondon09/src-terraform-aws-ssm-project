@@ -17,7 +17,7 @@ env:
   TF_VAR_backend_bucket: ${{ secrets.BACKEND_BUCKET }}
   TF_VAR_dynamo_table: ${{ secrets.DYNAMO_TABLE }}
   TF_VAR_aws_profile: "github-actions"
-  TF_VAR_AWS_REGION: ${{ secrets.AWS_REGION }}
+  TF_VAR_aws_region: ${{ vars.AWS_REGION }}
 
 permissions:
   id-token: write   # Required for OIDC
