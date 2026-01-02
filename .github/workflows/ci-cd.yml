@@ -9,7 +9,20 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'plan'
+        type: choice
+        options:
+          - plan
+          - apply
+          - destroy
+      confirm_destroy:
+        description: 'Type "destroy" to confirm destruction'
+        required: false
+        type: string
 env:
   TF_VERSION: "1.7.0"
   AWS_REGION: ${{ secrets.AWS_REGION }}
