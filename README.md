@@ -12,6 +12,7 @@ This project demonstrates infrastructure-as-code best practices by deploying a s
 - **Least Privilege IAM**: Dedicated IAM role with minimal required permissions for SSM operations
 - **Network Security**: SSM VPC endpoint for private, secure traffic routing without internet exposure
 - **Compute**: Two Amazon Linux 2 EC2 instances (one public, one private) with pre-installed SSM agent
+- **CI/CD Pipeline**: GitHub Actions workflow with OIDC authentication, BDD testing using terraform-compliance, and automated deployments
 - **Test**: BDD testing using terraform-compliance for security and compliance.
 
 ## Architecture
@@ -21,6 +22,9 @@ This project demonstrates infrastructure-as-code best practices by deploying a s
 ## Key Features
 
 **Infrastructure as Code**: Modular Terraform configuration for easy replication and maintenance  
+**CI/CD Pipeline**: GitHub Actions with OIDC authentication—no stored AWS credentials  
+**BDD Testing**: Automated compliance testing with terraform-compliance using Gherkin syntax  
+**Security Scanning**: Integrated tfsec and Checkov for infrastructure security analysis  
 **Secure Access**: No SSH keys or bastion hosts required  
 **Scalable Design**: Variables for CIDR blocks and AZ configuration  
 **Cost Optimized**: SSM VPC endpoint routes traffic through AWS private network  
@@ -132,7 +136,6 @@ terraform destroy
 - Implement Auto Scaling Group for production workloads
 - Configure VPC Flow Logs for network traffic analysis
 - Add RDS database in private subnet
-- Implement Infrastructure CI/CD pipeline
 - Add Application Load Balancer for multi-instance deployments
 
 
