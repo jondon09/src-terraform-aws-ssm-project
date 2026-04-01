@@ -88,7 +88,7 @@ module "ec2_private1" {
   }
 }
 
-### EC2 Security group and associated rules ###
+### EC2 Security group and associated rules changes ###
 resource "aws_security_group" "ssm_ec2" {
   vpc_id      = module.networking.vpc_resource.vpc_id
   name        = "Allow SSM for EC2"
